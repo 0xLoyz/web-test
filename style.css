@@ -1,0 +1,45 @@
+:root{
+  --bg:#0a0b0f;--surface:#13151b;--surface2:#191c24;--border:#292d38;
+  --text:#e9ebf1;--muted:#9299a8;--accent:#5de1ff;--accent2:#a96bff;
+  --danger:#ff637d;--radius:18px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 10% 0%,#15212a 0,transparent 32%),var(--bg);
+color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+.topbar{max-width:1180px;margin:auto;padding:38px 22px 22px;display:flex;justify-content:space-between;gap:20px;align-items:flex-start}
+.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--accent);font-weight:800}
+h1{margin:4px 0;font-size:clamp(28px,5vw,46px);letter-spacing:-.04em}
+h2{margin:0 0 5px;font-size:19px}
+p{margin:0;color:var(--muted)}
+.layout{max-width:1180px;margin:auto;padding:0 22px 60px;display:grid;gap:18px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.018)),var(--surface);
+border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 20px 50px rgba(0,0,0,.2)}
+.drop-zone{min-height:260px;border:1px dashed #3b4352;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;transition:.2s}
+.drop-zone.drag{border-color:var(--accent);background:rgba(93,225,255,.06);transform:scale(1.005)}
+.drop-icon{width:66px;height:66px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07090d;font-weight:900;letter-spacing:.05em;margin-bottom:14px}
+.drop-zone h2{font-size:24px}.drop-zone small{margin-top:14px;color:#687080}
+.primary,.ghost{border:1px solid var(--border);border-radius:11px;padding:10px 15px;color:var(--text);background:var(--surface2);font-weight:700}
+.primary{border:0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07090d}
+.ghost:hover{border-color:#50586a}.danger{color:#ff8799}
+.section-head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:15px}
+.badge{min-width:32px;padding:5px 9px;text-align:center;border-radius:99px;background:#242934;color:var(--accent);font-weight:800}
+.project-list{display:grid;gap:10px}
+.project{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--border);border-radius:13px;background:#101219}
+.project-main{min-width:0;flex:1}.project-name{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.project-meta{color:var(--muted);font-size:12px}.project-actions{display:flex;gap:7px;flex-wrap:wrap}
+.empty{padding:35px;text-align:center;color:#697180;border:1px dashed var(--border);border-radius:13px}
+.progress-wrap{padding-top:16px}.progress-head{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:7px}
+.progress{height:8px;border-radius:99px;background:#242833;overflow:hidden}.progress i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .2s}
+.preview-shell{height:min(72vh,760px);background:#fff;border-radius:13px;overflow:hidden;border:1px solid var(--border)}
+iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+.runner-head{align-items:flex-start}.runner-actions{display:flex;gap:7px;flex-wrap:wrap}
+.hidden{display:none!important}
+dialog{width:min(420px,calc(100% - 30px));border:1px solid var(--border);border-radius:17px;background:#14171e;color:var(--text);padding:22px;box-shadow:0 30px 100px #000}
+dialog::backdrop{background:rgba(0,0,0,.72)}
+dialog p{margin-bottom:16px}dialog input{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;background:#0d0f14;color:var(--text);outline:none}
+dialog input:focus{border-color:var(--accent)}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.error{min-height:20px;color:var(--danger);font-size:13px;margin-top:9px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#222631;color:var(--text);border:1px solid var(--border);padding:11px 15px;border-radius:11px;transition:.25s;z-index:20}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:700px){.topbar{padding-top:24px;flex-direction:column}.topbar .ghost{align-self:stretch}.card{padding:14px}.project{align-items:flex-start}.project-actions{width:100%}.project{flex-wrap:wrap}.project-main{flex-basis:calc(100% - 50px)}.runner-actions{width:100%}.runner-actions button{flex:1}.preview-shell{height:65vh}}
