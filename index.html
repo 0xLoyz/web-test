@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Deployer - Zip to GitHub Pages</title>
+    <!-- Library JSZip dari CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
+    <!-- Canvas untuk partikel background -->
     <canvas id="particles-bg"></canvas>
 
     <div class="wrapper">
@@ -19,7 +21,7 @@
             <div class="input-group">
                 <label>Personal Access Token (PAT):</label>
                 <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxx">
-                <div class="note">Centang scope "repo" & "delete_repo" (jika ingin bisa menghapus).</div>
+                <div class="note">Centang scope "repo" & "delete_repo" di GitHub.</div>
             </div>
 
             <div class="input-group">
@@ -30,6 +32,7 @@
             <div class="input-group">
                 <label>Upload File Web (.zip):</label>
                 <input type="file" id="zipFile" accept=".zip">
+                <div class="note">Pastikan file index.html ada di luar folder dalam ZIP.</div>
             </div>
 
             <div class="input-group checkbox-group">
@@ -47,7 +50,7 @@
         <div class="container container-danger">
             <h2 class="text-danger">🗑️ Hentikan Project</h2>
             <div class="note danger-note" style="margin-bottom: 15px; text-align: center;">
-                Menghapus project secara permanen dan mematikan URL aktif seketika.
+                Menghapus project dari akun GitHub dan mematikan URL aktif seketika.
             </div>
             
             <button id="deleteBtn" class="btn-danger">
