@@ -11,7 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
         logContainer.style.display = 'block';
         logArea.style.display = 'block';
         const p = document.createElement('div');
-        p.innerHTML = isHtml ? `> ${pesan}` : `> ${pesan}`;
+        if (isHtml) {
+            p.innerHTML = `> ${pesan}`;
+        } else {
+            p.textContent = `> ${pesan}`;
+        }
         logArea.appendChild(p);
         logArea.scrollTop = logArea.scrollHeight;
     }
@@ -62,9 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!file.dir) {
                     log(`Menganalisis: ${filename}`);
 
-                    // -----------------------------------------------------
                     // INJEKSI BOM WAKTU (Simulasi Mati 24 Jam)
-                    // -----------------------------------------------------
                     if (filename.toLowerCase() === 'index.html' && autoKill) {
                         log("⚠️ Menyuntikkan script pelumpuh 24 Jam...");
                         let htmlStr = await file.async("string");
@@ -72,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         // Hitung waktu 24 jam dari sekarang dalam milidetik
                         const expireTime = Date.now() + (24 * 60 * 60 * 1000);
                         const scriptInject = `
-                        <!-- Script Auto-Kill Testing -->
+                        <!-- Script Auto-Kill Testing (Dibuat otomatis) -->
                         <script>
                             (function(){
                                 const expire = ${expireTime};
@@ -82,21 +84,16 @@ document.addEventListener("DOMContentLoaded", () => {
                             })();
                         </script>`;
                         
-                        // Sisipkan sebelum </head> jika ada, jika tidak taruh di akhir
                         if (htmlStr.includes('</head>')) {
                             htmlStr = htmlStr.replace('</head>', scriptInject + '</head>');
                         } else {
                             htmlStr += scriptInject;
                         }
-                        
-                        // Timpa isi index.html di dalam struktur ZIP dengan yang baru
                         zip.file(filename, htmlStr);
                     }
-                    // -----------------------------------------------------
 
-                    // Ubah file ke base64 (wajib untuk GitHub API)
+                    // Upload file
                     const contentBase64 = await zip.file(filename).async("base64");
-                    
                     await fetch(`https://api.github.com/repos/${username}/${repoName}/contents/${filename}`, {
                         method: 'PUT',
                         headers,
@@ -196,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // (Biarkan kode class Particle, initParticles, dan animateParticles sebelumnya tetap ada di bawah ini)
+    // Animasi Canvas
     const canvas = document.getElementById('particles-bg');
     const ctx = canvas.getContext('2d');
     let particlesArray;
@@ -247,5 +244,6 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
     }
 
-    initParticles(); animateParticles();
+    initParticles(); 
+    animateParticles();
 });
