@@ -107,19 +107,6 @@ input[type="file"]::file-selector-button {
 input[type="file"]::file-selector-button:hover { background: #4facfe; }
 input[type="file"]:hover { border-color: #4facfe; }
 
-.checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.checkbox-group label { margin-bottom: 0; cursor: pointer; color: #4facfe; font-weight: 600;}
-.checkbox-group input { width: 18px; height: 18px; cursor: pointer; }
-
 /* Styling Tombol */
 button { 
     width: 100%; 
